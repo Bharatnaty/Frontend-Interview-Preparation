@@ -95,9 +95,12 @@ This repo is collaborative — feel free to contribute more questions 🚀
 
 1. What is an implicit return in functional components?
    - If a component only contains a single return statement, you can skip the return keyword and curly braces by using parentheses:
-   - `const MyComponent = () => (
-      <h1>Hello, world!</h1>
-      );`
+   - ```javascript
+         // Functional component with implicit return
+         const MyComponent = () => (
+           <h1>Hello, world!</h1>
+         );
+         export default MyComponent;
 
 1. Why must a React component return a single root element?
    - React requires one root element because the virtual DOM needs a single entry point to represent the component tree.
