@@ -88,6 +88,34 @@ This repo is collaborative — feel free to contribute more questions 🚀
 1. Explain SSR, SSG, and ISR in Next.js.  
    - SSR: Rendered on request.  
    - SSG: Rendered at build time.  
-   - ISR: Rebuilds pages after interval.  
+   - ISR: Rebuilds pages after interval.
+  
+1. What are functional components in React?
+   - Functional components are JavaScript functions that accept arguments (called props) and return React elements that describe what should appear on the screen.
+
+1. What is an implicit return in functional components?
+   - If a component only contains a single return statement, you can skip the return keyword and curly braces by using parentheses:
+   - `const MyComponent = () => (
+      <h1>Hello, world!</h1>
+      );`
+
+1. Why must a React component return a single root element?
+   - React requires one root element because the virtual DOM needs a single entry point to represent the component tree.
+     
+1. Why is JSX not valid JavaScript?
+   - Browsers cannot directly interpret JSX. It must be transpiled (commonly by Babel) into JavaScript that React can execute.
+  
+1. React Elements vs. HTML Elements?
+   - | Feature        | React Element                 | HTML Element                      |
+     | -------------- | ----------------------------- | --------------------------------- |
+     | What it is     | JS object (virtual DOM node)  | Actual DOM node in browser        |
+     | Mutability     | Immutable                     | Mutable                           |
+     | Created by     | JSX / `React.createElement()` | HTML / `document.createElement()` |
+     | Where it lives | In memory (virtual DOM)       | In browser DOM tree               |
+     | Purpose        | Describe UI structure         | Display UI structure              |
+
+   
+
+     
 
 ---
