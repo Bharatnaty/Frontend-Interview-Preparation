@@ -79,7 +79,11 @@ This repo is collaborative — feel free to contribute more questions 🚀
 1. What is the difference between `useMemo`, `useCallback`, and `React.memo`?  
    - `useMemo`: Memoizes a **calculated value**.  
    - `useCallback`: Memoizes a **function** reference.  
-   - `React.memo`: Memoizes a **whole component** to avoid re-renders.  
+   - `React.memo`: Memoizes a **whole component** to avoid re-renders.
+
+1. What is the difference between `useMemo`, `useCallback`, and `React.memo`?  
+   <img width="1268" height="475" alt="image" src="https://github.com/user-attachments/assets/b78c9190-2d18-4b5d-be26-7881d1e09a5f" />
+
 
 1. What is the difference between client and server components in Next.js?  
    - Client: Run in browser, can use state/effects.  
