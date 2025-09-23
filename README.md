@@ -83,7 +83,66 @@ This repo is collaborative — feel free to contribute more questions 🚀
 
 1. What is the difference between `useMemo`, `useCallback`, and `React.memo`?  
    <img width="1268" height="475" alt="image" src="https://github.com/user-attachments/assets/b78c9190-2d18-4b5d-be26-7881d1e09a5f" />
+   **useCallback Example**
 
+      ```import React, { useState, useCallback } from "react";
+      
+      function Child({ onAdd }) {
+        console.log("Child re-rendered");
+        return <button onClick={onAdd}>Add</button>;
+      }
+      
+      export default function Parent() {
+        const [count, setCount] = useState(0);
+        const [theme, setTheme] = useState("light");
+      
+        // ✅ Using useCallback prevents unnecessary re-creations of this function
+        const handleAdd = useCallback(() => {
+          setCount((prev) => prev + 1);
+        }, []);
+      
+        return (
+          <div>
+            <h2>Count: {count}</h2>
+            <Child onAdd={handleAdd} />
+            <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+              Toggle Theme
+            </button>
+          </div>
+        );
+      }
+      ```
+   **useMemo Exmaple**
+
+      ```import React, { useState, useMemo } from "react";
+
+         export default function ProductList({ products }) {
+           const [search, setSearch] = useState("");
+         
+           // ✅ useMemo prevents re-running this heavy filter on every render
+           const filteredProducts = useMemo(() => {
+             console.log("Filtering products...");
+             return products.filter((p) =>
+               p.name.toLowerCase().includes(search.toLowerCase())
+             );
+           }, [search, products]);
+         
+           return (
+             <div>
+               <input
+                 placeholder="Search..."
+                 value={search}
+                 onChange={(e) => setSearch(e.target.value)}
+               />
+               <ul>
+                 {filteredProducts.map((p) => (
+                   <li key={p.id}>{p.name}</li>
+                 ))}
+               </ul>
+             </div>
+           );
+         }
+      ```
 
 1. What is the difference between client and server components in Next.js?  
    - Client: Run in browser, can use state/effects.  
