@@ -179,9 +179,19 @@ This repo is collaborative — feel free to contribute more questions 🚀
      | Created by     | JSX / `React.createElement()` | HTML / `document.createElement()` |
      | Where it lives | In memory (virtual DOM)       | In browser DOM tree               |
      | Purpose        | Describe UI structure         | Display UI structure              |
-
-   
-
      
+1. What are props in React?
+   - Read-only data passed from parent to child to configure components.
 
----
+1. What is the difference between props and state?
+   - Props: Immutable, passed from parent.
+   - State: Mutable, managed within the component.
+
+1. Can a child component modify props directly?
+   - ❌ No. Props are read-only; children use callback functions to update parent data.
+
+1. What is the children prop used for?
+   - To render nested JSX elements inside a component.
+
+1. What is the purpose of defaultProps?
+   - To define default values when a prop isn’t passed.
