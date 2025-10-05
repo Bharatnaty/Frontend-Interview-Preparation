@@ -195,3 +195,94 @@ This repo is collaborative — feel free to contribute more questions 🚀
 
 1. What is the purpose of defaultProps?
    - To define default values when a prop isn’t passed.
+     
+1. React Component Lifecycle (Class & Function)
+   - What is the Component Lifecycle?
+      Every React component goes through a lifecycle of three main phases:
+
+      - Mounting – Component is created and inserted into the DOM.
+      - Updating – Component re-renders when props or state change.
+      - Unmounting – Component is removed from the DOM.
+
+     These phases allow developers to run code at specific moments, such as fetching data, optimizing performance, or cleaning up resources.
+   - Class Component Lifecycle
+     Class components use built-in lifecycle methods that get called automatically by React at different phases.
+     ```
+      | Phase          | Method                              |   Purpose                                | When It Runs                        |
+      | -------------- | ----------------------------------- | ---------------------------------------- | ----------------------------------- |
+      | Mounting       | `constructor()`                     | Initialize state and bind methods.       | Before component appears on screen. |
+      |                | `static getDerivedStateFromProps()` | Sync state from props (rarely used).     | Before every render.                |
+      |                | `render()`                          | Return JSX (UI).                         | During render.                      |
+      |                | `componentDidMount()`               | Run side effects (fetch, subscriptions). | After first render.                 |
+      | Updating       | `shouldComponentUpdate()`           | Optimize by skipping re-renders.         | Before re-render.                   |
+      |                | `getSnapshotBeforeUpdate()`         | Capture DOM info before update.          | Before DOM changes.                 |
+      |                | `componentDidUpdate()`              | Run side effects after updates.          | After DOM is updated.               |
+      | Unmounting     | `componentWillUnmount()`            | Cleanup (timers, listeners, etc).        | Before component is removed.        |
+
+     ```
+   - **Example**
+     ```
+           class MyComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { data: null };
+        }
+      
+        componentDidMount() {
+          console.log("Mounted");
+        }
+      
+        shouldComponentUpdate(nextProps, nextState) {
+          return nextState.data !== this.state.data;
+        }
+      
+        componentDidUpdate() {
+          console.log("Updated");
+        }
+      
+        componentWillUnmount() {
+          console.log("Unmounted");
+        }
+      
+        render() {
+          return <div>{this.state.data}</div>;
+        }
+      }
+
+     ```
+
+   - Functional Component Lifecycle (with Hooks)
+     Functional components don’t have lifecycle methods, but React Hooks provide equivalent behavior — mainly through useEffect() and useLayoutEffect().
+     ```
+      | **Lifecycle Stage**  | **Class Method**             | **Functional Equivalent (Hooks)**                   |
+      | -------------------- | ---------------------------- | --------------------------------------------------- |
+      | Mounting             | `componentDidMount()`        | `useEffect(() => { ... }, [])`                      |
+      | Updating             | `componentDidUpdate()`       | `useEffect(() => { ... }, [dependencies])`          |
+      | Unmounting           | `componentWillUnmount()`     | Cleanup function inside `useEffect()`               |
+      | State initialization | `constructor()`              | `useState()`                                        |
+      | Derived state        | `getDerivedStateFromProps()` | Logic inside `useEffect()` reacting to prop changes |
+     ```
+   - **Example:**
+     ```
+     import React, { useState, useEffect } from "react";
+
+      function MyComponent() {
+        const [data, setData] = useState(null);
+      
+        // componentDidMount + componentDidUpdate
+        useEffect(() => {
+          console.log("Mounted or Updated");
+          setData("Hello React!");
+      
+          // componentWillUnmount
+          return () => {
+            console.log("Cleanup before unmount");
+          };
+        }, []); // empty array = run once (on mount)
+      
+        return <div>{data}</div>;
+      }
+     ```
+   - **Lifecycle Flow Summary**
+     <img width="1016" height="578" alt="image" src="https://github.com/user-attachments/assets/2f6a21d4-f30e-4aa2-a27e-e7b5a837a0c4" />
+
