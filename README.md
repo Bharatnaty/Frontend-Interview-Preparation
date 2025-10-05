@@ -284,5 +284,7 @@ This repo is collaborative — feel free to contribute more questions 🚀
       }
      ```
    - **Lifecycle Flow Summary**
-     <img width="1016" height="578" alt="image" src="https://github.com/user-attachments/assets/2f6a21d4-f30e-4aa2-a27e-e7b5a837a0c4" />
-
+     - Class Components
+       Mounting → Updating → Unmounting constructor → getDerivedStateFromProps → render → componentDidMount → shouldComponentUpdate → render → getSnapshotBeforeUpdate → componentDidUpdate → componentWillUnmount
+     - Functional Components
+       Mounting → Updating → Unmounting
