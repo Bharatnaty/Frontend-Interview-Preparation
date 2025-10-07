@@ -28,7 +28,23 @@ This repo is collaborative — feel free to contribute more questions 🚀
    - `id`: Unique identifier (used once per page).  
    - `class`: Can be reused for multiple elements.  
 
----
+1. What is **datalist** in html?
+   - The <datalist> element in HTML is used to provide a list of predefined suggestions for an <input> field.
+   - It gives users the convenience of auto-complete options, while still allowing free text entry.
+   - **Example**
+     ```
+     <input list="browsers" name="browser" placeholder="Choose or type...">
+
+      <datalist id="browsers">
+        <option value="Google Chrome">
+        <option value="Mozilla Firefox">
+        <option value="Microsoft Edge">
+        <option value="Safari">
+        <option value="Opera">
+      </datalist>
+
+     ```
+
 
 ## 🔵 CSS
 
