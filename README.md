@@ -288,3 +288,28 @@ This repo is collaborative — feel free to contribute more questions 🚀
        Mounting → Updating → Unmounting constructor → getDerivedStateFromProps → render → componentDidMount → shouldComponentUpdate → render → getSnapshotBeforeUpdate → componentDidUpdate → componentWillUnmount
      - Functional Components
        Mounting → Updating → Unmounting
+       
+1. What is the purpose of defaultProps?
+    - | Feature         | React Element                         | HTML Element                             |
+      | --------------- | ------------------------------------- | ---------------------------------------- |
+      | **Type**        | JS Object                             | DOM Node                                 |
+      | **Exists in**   | Virtual DOM                           | Real DOM                                 |
+      | **Created by**  | `React.createElement()` or JSX        | Browser or `document.createElement()`    |
+      | **Mutable?**    | ❌ No — immutable                     | ✅ Yes — mutable                        |
+      | **Performance** | Efficient (batch updates via diffing) | Slower when directly modified repeatedly |
+      | **Purpose**     | Describe what UI should look like     | Rendered UI on screen                    |
+
+   - **Visualization**
+      JSX (developer writes)
+         ↓
+      React.createElement()
+         ↓
+      React Element (JS object)
+         ↓
+      Virtual DOM
+         ↓
+      React DOM reconciler
+         ↓
+      Real HTML Element (browser renders)
+
+
