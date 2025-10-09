@@ -329,3 +329,58 @@ This repo is collaborative — feel free to contribute more questions 🚀
       Real HTML Element (browser renders)
 
 
+1. In React useState is mutable or immutable?
+   - useState is immutable in react. React will always expect to create new state not to modify the existing state. If the existing state is modified react might not re-render. 
+   - **The wrong approach (direct mutation)**
+ 
+   ```
+   
+   import { useState } from 'react';
+   
+   function ItemList() {
+     const [items, setItems] = useState(['apple', 'banana']);
+   
+     const addItem = () => {
+       // 🔴 Wrong: Directly mutating the state array
+       items.push('cherry');
+       setItems(items);
+     };
+   
+     return (
+       <div>
+         <button onClick={addItem}>Add Cherry</button>
+         <ul>
+           {items.map((item, index) => (
+             <li key={index}>{item}</li>
+           ))}
+         </ul>
+       </div>
+     );
+   }
+   
+   ```
+   - **The correct approach (immutability)**
+   ```
+   import { useState } from 'react';
+   
+   function ItemList() {
+     const [items, setItems] = useState(['apple', 'banana']);
+   
+     const addItem = () => {
+       // ✅ Correct: Creating a new array with the new item
+       setItems([...items, 'cherry']);
+     };
+   
+     return (
+       <div>
+         <button onClick={addItem}>Add Cherry</button>
+         <ul>
+           {items.map((item, index) => (
+             <li key={index}>{item}</li>
+           ))}
+         </ul>
+       </div>
+     );
+   }
+   
+   ```
