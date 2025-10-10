@@ -423,10 +423,10 @@ This repo is collaborative — feel free to contribute more questions 🚀
      - **Cons:**
          - event.target changes based on where the user clicked (may need extra checks).
          - Doesn’t work well if event propagation is stopped early. 
-
    - Internal Use of event in react
      - React attaches a few global event listeners (at the root or document level) instead of attaching one to every element.
-     - React does not attach a click listener to that actual <button> DOM node. Instead, React attaches a single event listener for all clicks at the top-level container.
+     - React does not attach a click listener to that actual <button> DOM node.
+     - Instead, React attaches a single event listener for all clicks at the top-level container.
 
 
    
