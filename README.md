@@ -330,7 +330,8 @@ This repo is collaborative — feel free to contribute more questions 🚀
 
 
 1. In React useState is mutable or immutable?
-   - useState is immutable in react. React will always expect to create new state not to modify the existing state. If the existing state is modified react might not re-render. 
+   - useState is immutable in react. React will always expect to create new state not to modify the existing state. If the existing state is modified react might not re-render.
+   - A functional update is when you pass a function to the state setter, rather than a new value directly.
    - **The wrong approach (direct mutation)**
  
    ```
