@@ -385,3 +385,49 @@ This repo is collaborative — feel free to contribute more questions 🚀
    }
    
    ```
+   
+1. event delegation vs event handling? event delegation vs event handling? React use what method by default for event?
+   - Event Handling (Normal DOM Way)
+     - Event handling means attaching event listeners directly to DOM elements.
+     - **Example**
+       ```
+       <button onclick="handleClick()">Click Me</button>
+       ```
+     - **behaviour**
+        - Each element that listens to an event has its own separate listener.
+        - For many elements, the browser stores many handlers — this can consume memory and slightly slow performance if there are thousands of nodes.
+     - **Pros:**
+        - Simple and direct.
+        - Works exactly as per browser default event system.
+     - **Cons:**
+        - Inefficient if many elements need the same event.
+        - Harder to manage dynamically added elements.
+        - Slightly inconsistent across browsers historically.
+   - Event Delegation
+     - Event Delegation is a pattern where instead of adding many listeners, you add a single listener to a common ancestor and let events bubble up the DOM.
+     - **Example**
+       ```
+       <ul onClick={handleItemClick}>
+         <li>Item 1</li>
+         <li>Item 2</li>
+         <li>Item 3</li>
+       </ul>
+       ```
+     - **Behavior:**
+         - The single listener on the <ul> handles clicks from any <li> inside it.
+         - Uses the event bubbling mechanism (event travels from target → ancestors). 
+     - **Pros:**
+         - Much more memory-efficient.
+         - Can handle future elements added dynamically.
+         - Centralized event control.   
+     - **Cons:**
+         - event.target changes based on where the user clicked (may need extra checks).
+         - Doesn’t work well if event propagation is stopped early. 
+
+   - Internal Use of event in react
+     - React attaches a few global event listeners (at the root or document level) instead of attaching one to every element.
+     - React does not attach a click listener to that actual <button> DOM node. Instead, React attaches a single event listener for all clicks at the top-level container.
+
+
+   
+
