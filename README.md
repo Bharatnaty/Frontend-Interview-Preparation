@@ -386,27 +386,29 @@ This repo is collaborative — feel free to contribute more questions 🚀
    
    ```
    
-1. event delegation vs event handling? event delegation vs event handling? React use what method by default for event?
-   - Event Handling (Normal DOM Way)
+1. Event Delegation vs Event Handling — React default method for events
+
+   - **Event Handling (Normal DOM Way)**
      - Event handling means attaching event listeners directly to DOM elements.
      - **Example**
-       ```
+       ```html
        <button onclick="handleClick()">Click Me</button>
        ```
-     - **behaviour**
-        - Each element that listens to an event has its own separate listener.
-        - For many elements, the browser stores many handlers — this can consume memory and slightly slow performance if there are thousands of nodes.
+     - **Behaviour**
+       - Each element that listens to an event has its own separate listener.
+       - For many elements, the browser stores many handlers — this can consume memory and slightly slow performance if there are thousands of nodes.
      - **Pros:**
-        - Simple and direct.
-        - Works exactly as per browser default event system.
+       - Simple and direct.
+       - Works exactly as per browser default event system.
      - **Cons:**
-        - Inefficient if many elements need the same event.
-        - Harder to manage dynamically added elements.
-        - Slightly inconsistent across browsers historically.
-   - Event Delegation
+       - Inefficient if many elements need the same event.
+       - Harder to manage dynamically added elements.
+       - Slightly inconsistent across browsers historically.
+
+   - **Event Delegation**
      - Event Delegation is a pattern where instead of adding many listeners, you add a single listener to a common ancestor and let events bubble up the DOM.
      - **Example**
-       ```
+       ```jsx
        <ul onClick={handleItemClick}>
          <li>Item 1</li>
          <li>Item 2</li>
@@ -414,20 +416,95 @@ This repo is collaborative — feel free to contribute more questions 🚀
        </ul>
        ```
      - **Behavior:**
-         - The single listener on the <ul> handles clicks from any <li> inside it.
-         - Uses the event bubbling mechanism (event travels from target → ancestors). 
+       - The single listener on the `<ul>` handles clicks from any `<li>` inside it.
+       - Uses the event bubbling mechanism (event travels from target → ancestors).
      - **Pros:**
-         - Much more memory-efficient.
-         - Can handle future elements added dynamically.
-         - Centralized event control.   
+       - Much more memory-efficient.
+       - Can handle future elements added dynamically.
+       - Centralized event control.
      - **Cons:**
-         - event.target changes based on where the user clicked (may need extra checks).
-         - Doesn’t work well if event propagation is stopped early. 
-   - Internal Use of event in react
+       - `event.target` changes based on where the user clicked (may need extra checks).
+       - Doesn’t work well if event propagation is stopped early.
+
+   - **Internal Use of Event in React**
      - React attaches a few global event listeners (at the root or document level) instead of attaching one to every element.
-     - React does not attach a click listener to that actual <button> DOM node.
+     - React does not attach a click listener to the actual `<button>` DOM node.
      - Instead, React attaches a single event listener for all clicks at the top-level container.
 
 
-   
+1. Controlled vs. Uncontrolled Components.
+   - **Controlled Components**
+     - In a controlled component, form data is handled by the React component state.
+     - The value of the input element is controlled via React’s state (`useState` or `this.state`).
+     - Every change in the input field triggers an event handler that updates the state.
+     - **Example**
+       ```jsx
+       import { useState } from "react";
 
+       function ControlledInput() {
+         const [name, setName] = useState("");
+
+         const handleChange = (e) => {
+           setName(e.target.value);
+         };
+
+         const handleSubmit = (e) => {
+           e.preventDefault();
+           alert(`Submitted name: ${name}`);
+         };
+
+         return (
+           <form onSubmit={handleSubmit}>
+             <input type="text" value={name} onChange={handleChange} />
+             <button type="submit">Submit</button>
+           </form>
+         );
+       }
+
+       export default ControlledInput;
+       ```
+     - **Key Points**
+       - React is the single source of truth for form data.
+       - Easier to validate and manipulate input values.
+       - Slightly more code but better control.
+
+   - **Uncontrolled Components**
+     - In an uncontrolled component, form data is handled by the DOM itself.
+     - You access the value using `ref` instead of React state.
+     - **Example**
+       ```jsx
+       import { useRef } from "react";
+
+       function UncontrolledInput() {
+         const nameRef = useRef();
+
+         const handleSubmit = (e) => {
+           e.preventDefault();
+           alert(`Submitted name: ${nameRef.current.value}`);
+         };
+
+         return (
+           <form onSubmit={handleSubmit}>
+             <input type="text" ref={nameRef} />
+             <button type="submit">Submit</button>
+           </form>
+         );
+       }
+
+       export default UncontrolledInput;
+       ```
+     - **Key Points**
+       - DOM manages the data instead of React.
+       - Simpler for quick or legacy forms.
+       - Harder to validate or sync with other UI states.
+
+   - **Comparison Table**
+
+     | Feature                         | Controlled Component                          | Uncontrolled Component                     |
+     |----------------------------------|-----------------------------------------------|--------------------------------------------|
+     | Data source                      | React state                                   | DOM (`ref`)                                |
+     | Value updated by                 | `onChange` handler                            | User input (DOM)                           |
+     | Validation                       | Easy to validate within React                 | Requires manual DOM access                 |
+     | Performance                      | May re-render more often                      | Fewer re-renders                           |
+     | Use case                         | Complex, dynamic, validated forms             | Simple, non-reactive forms                 |
+     | Example hooks                    | `useState`, `useEffect`                       | `useRef`                                   |
